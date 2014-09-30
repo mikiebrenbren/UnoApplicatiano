@@ -1,21 +1,36 @@
 package statsinterface;
 
-import java.util.HashSet;
+import java.util.HashMap;
 
 /**
- * the league is a collection of teams, the league has permissions to change statistics within a team(record of each team)
+ * the league is a collection of teams(HashMap), the league has permissions to change statistics within a team(record of each team)
  * league also has permissions to change 
  */
 public class League {
 
-	@SuppressWarnings("unused")
-	private HashSet<Team> leagueTeams;
+	private HashMap<String,Team> leagueTeams;
 	
 	public League(){
 		
-		leagueTeams = new HashSet<Team>();
+		leagueTeams = new HashMap<String, Team>();
 	}
 	
+	public void addTeam(Team t){
+		
+		leagueTeams.put(t.getName(), t);
+	}
 	
+	public void removeTeam(Team t){
+		
+		leagueTeams.remove(t.getName());
+	}
+	
+	public void loss(Team t){
+		leagueTeams.get(t).winLose(false);
+	}
+	public void win(Team t){
+		leagueTeams.get(t).winLose(true);
+	}
+
 	
 }

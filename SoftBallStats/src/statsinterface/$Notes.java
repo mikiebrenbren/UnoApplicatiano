@@ -27,7 +27,6 @@ public class $Notes {
 	 * 
 	 * }
 	 * 
-	 * 
 	 * 								PERMISSIONS
 	 * 
 	 * ---one person can haver more than one adminstrative privelage ex: on person can have league, team permission and can 

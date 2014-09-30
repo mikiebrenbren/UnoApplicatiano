@@ -1,7 +1,7 @@
 package statsinterface;
 
 public class Player extends Person {
-	
+
 	//there needs to be a pitcher class within the player class
 	//make this the parent to pitcher and hitter classes
 
@@ -11,62 +11,84 @@ public class Player extends Person {
 	 * there are going to have to be different stats, these different stats will be added to the overall stats 
 	 * at the end of each game.  
 	 * 
+	 * restrictions will come with the gui on who changes stats, question is should the setters only be 
+	 * in the league 
+	 * 
 	 */
-	
-	private int hit, error, rbi, run, out, atBat, walk, strikeouts, homeruns;
+
+	private int hits, error, rbi, run, out, atBats, walk, strikeouts, homeruns;
 	private double obp;
 	@SuppressWarnings("unused")
 	private String firstName, lastName, description;
 	private boolean isAdmin;
 
-	
+
 	public Player(){
-		
+
 	}
-	
+	public int getAtBats(){
+		return atBats;
+	}
+	public void setAtBats(int n){
+		if(isAdmin)
+			atBats = n;
+		else 
+			return;
+	}
+
 	public int getHomeruns(){
 		return homeruns;
 	}
-	
+
 	public void setHomeruns(int n){
-		homeruns = n;
+		if(isAdmin)
+			homeruns = n;
+		else 
+			return;
 	}
 	public int getStrikeouts(){
 		return strikeouts;
 	}
-	
+
 	public void setStrikeouts(int n){
-		strikeouts= n;
+		if(isAdmin)
+			strikeouts= n;
+		else
+			return;
 	}
-	
+
 	/**
 	 * gets on base percentage 
 	 * @return
 	 */
 	public double getOBP(){
+		setOBP();
 		return obp;
 	}
 	/**
-	 * sets on base percentage 
+	 * sets on base percentage ****this might be unessary maybe useful to admin
 	 */
-	public void setOBP(){
-		obp = (double)(walk+hit)/(out);
+	private void setOBP(){
+		if(isAdmin)
+			obp = (double)(walk+hits+homeruns)/(out+strikeouts+atBats);
+		else 
+			return;
 	}
-	
+
 	/**
 	 * gets batting average of each player
 	 * @return
 	 */
 	public double getAverage(){
-		
-		return (double)hit/ (double)atBat;
+
+		return (double)(hits+homeruns)/ (double)(atBats+strikeouts+out);
 	}
 	/**
 	 * gets number of hits that this player has hit
 	 * @return
 	 */
-	public int getHit() {
-		return hit;
+	public int getHits() {
+		return hits;
 	}
 
 	/**
@@ -105,8 +127,15 @@ public class Player extends Person {
 	 * sets the number of hits this player has
 	 * @param hit
 	 */
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setHits(int hit) {
+		if(isAdmin)
+			this.hits = hit;
+		else 
+			return;
+	}
+
+	public void incrHits(){
+		this.hits++;
 	}
 
 	/**
@@ -114,7 +143,10 @@ public class Player extends Person {
 	 * @param error
 	 */
 	public void setError(int error) {
-		this.error = error;
+		if(isAdmin)
+			this.error = error;
+		else 
+			return;
 	}
 
 	/**
@@ -122,7 +154,10 @@ public class Player extends Person {
 	 * @param rbi
 	 */
 	public void setRbi(int rbi) {
-		this.rbi = rbi;
+		if(isAdmin)
+			this.rbi = rbi;
+		else 
+			return;
 	}
 
 	public void setRun(int run) {
@@ -130,32 +165,39 @@ public class Player extends Person {
 	}
 
 	public void setOut(int out) {
-		this.out = out;
+		if(isAdmin)
+			this.out = out;
+		else 
+			return;
 	}
-	
+
 	public void setWalk(int walk){
-		this.walk = walk;
+		if(isAdmin)
+			this.walk = walk;
+		else 
+			return;
 	}
-	
+
 	public int getWalk(){
 		return walk;
 	}
 
 	@Override
 	public void setFirstName(String n) {
+
 		firstName = n;
-		
+
 	}
 
 	@Override
 	public void setLastName(String n) {
-		
+
 		lastName = n;
 	}
 
 	@Override
 	public String getLastName() {
-		
+
 		return lastName;
 	}
 
@@ -163,7 +205,7 @@ public class Player extends Person {
 	public String getFirstName() {
 		return firstName;
 	}	
-	
+
 	@Override
 	public boolean isAdmin(){
 		return isAdmin;
@@ -172,7 +214,7 @@ public class Player extends Person {
 	public void setAdmin(boolean b){
 		isAdmin = b;
 	}
-	
+
 	/**
 	 * description, eventually could allow this to sync with twitter and facebook
 	 */
@@ -180,5 +222,5 @@ public class Player extends Person {
 	public void description(String s){
 		description = s;
 	}
-	
+
 }
