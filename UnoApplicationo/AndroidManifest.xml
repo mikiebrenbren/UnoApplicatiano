@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mikiebrenbren.myfirstapp"
+    package="com.mikiebrenbren.unoapplicationo"
     android:versionCode="1"
     android:versionName="1.0" >
 
